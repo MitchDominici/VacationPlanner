@@ -1,0 +1,24 @@
+﻿@model VacationPlanner.ViewModels.ItineraryViewModel
+@{
+    ViewData [ "Title" ] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Where are you headed?</h1>
+
+<form asp-controller="Itinerary" asp-action="Result" id="address" method="post">
+
+
+
+    <div class="form-group">
+
+        <input id="address" class=" form-control" asp-for="LocationName" placeholder="Search for a destination" autofocus />
+
+        <span asp-validation-for="LocationName"></span>
+    </div>
+    <button type="submit" class="btn btn-primary" value="Encode" onclick="codeAddress()">Search</button>
+
+
+</form>
+
+
