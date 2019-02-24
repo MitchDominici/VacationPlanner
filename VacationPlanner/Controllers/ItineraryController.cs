@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,48 +21,36 @@ namespace VacationPlanner.Controllers
             _context = dbContext;
         }
 
-        public IActionResult Index()
-        {
-            var itineraryViewModel = new ItineraryViewModel();
-            return View(itineraryViewModel);
-
-        }
-
-
-        [HttpPost]
-        public IActionResult Result(Itinerary location)
-        {
-
-            return View(location);
-
-        }
-
-
         
         public IActionResult Itinerary()
         {
-            return View();
+            var newItineraryViewModel = new ItineraryViewModel();
+            return View( newItineraryViewModel );
         }
-
+        
 
         [HttpPost]
         public IActionResult Itinerary(string[] destination)
         {
+            if (!ModelState.IsValid) return Redirect("/Itinerary/Results");
+
+
+            int lastCity = _context.City.Max(i => i.ID);
             foreach (var item in destination)
             {
-                _context.Itinerary.Add(new Itinerary{LocationName = item});//error
+
+                _context.Itinerary.Add(new Itinerary{Location = item, CityID = lastCity});
+                
             }
 
+            
             _context.SaveChanges();
             return Redirect("/Itinerary/AddItinerary");
         }
 
-        public IActionResult AddItinerary()
-        {
-            IList<Itinerary> itineraries = _context.Itinerary.Include( i => i.LocationName ).ToList();
+        
 
-            return View( itineraries );
-        }
+        
        
     }
 }

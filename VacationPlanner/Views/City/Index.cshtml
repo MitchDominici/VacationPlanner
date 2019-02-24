@@ -1,0 +1,38 @@
+﻿@model VacationPlanner.ViewModels.CityViewModel
+@{
+    ViewData [ "Title" ] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Where are you headed?</h1>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery UI Datepicker - Default functionality</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<form asp-controller="City" asp-action="AddCity" id="address" method="post">
+
+
+
+    <div class="form-group">
+
+        <input id="address" class=" form-control" asp-for="Name" placeholder="Search for a destination" autofocus />
+
+        <span asp-validation-for="Name"></span>
+
+
+        <input type="date" id="start" asp-for="StartDate" name="StartDate"/>
+        <input type="date" id="end" asp-for="EndDate" name="EndDate"/>
+
+    </div>
+    <button type="submit" class="btn btn-primary" value="Encode" onclick="codeAddress()">Search</button>
+
+
+</form>
+<script>
+    
+</script>
+
+

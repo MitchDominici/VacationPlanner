@@ -1,19 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VacationPlanner.Data;
 using VacationPlanner.Models;
 
 namespace VacationPlanner.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly ApplicationDbContext _context;
+
+
+        public HomeController( ApplicationDbContext dbContext )
+        {
+            _context = dbContext;
+        }
+
         public IActionResult Index()
         {
+            
+                
             return View();
         }
+
+       
 
         public IActionResult Privacy()
         {

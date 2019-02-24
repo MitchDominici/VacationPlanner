@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using VacationPlanner.Models;
-
 
 namespace VacationPlanner.ViewModels
 {
-    public class SearchViewModel
+    public class CityViewModel
     {
         public int ID { get; set; }
-        [Required( ErrorMessage = "Search location is required" )]
-        public string LocationName { get; set; }
-
-
+        [StringLength( 450 )]
+        public string Name { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
-
 }

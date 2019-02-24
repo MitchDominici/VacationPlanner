@@ -1,12 +1,5 @@
-﻿@model VacationPlanner.Models.Itinerary
+﻿@model VacationPlanner.Models.City
 
-
-
-
-@{
-    ViewData [ "Title" ] = "Results";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +18,7 @@
     var infowindow;
     function initMap() {
         var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ address: "@Model.LocationName" }, function(results, status) {
+        geocoder.geocode({ address: "@Model.Name" }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
                 var location = results[0].geometry.location,
                     lat = location.lat(),
@@ -79,8 +72,9 @@
             checkbox.type = "checkbox";
             checkbox.name = "destination";
             checkbox.value = place.name;
-            checkbox.id = "id";
-            checkbox.setAttribute("asp-for","LocationName");
+            
+            checkbox.setAttribute("asp-for", "LocationName");
+            
             
 
             var label = document.createElement('label')
@@ -109,7 +103,8 @@
 { 
         <h2>Results</h2>
         <div  id="places" > </div>
-        <button id="more">More results</button>
+    <button id="more">More results</button>
+  
 
     <input type="submit" value="Finished"/>
 }
@@ -117,7 +112,7 @@
 
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb_Rwd-ISTooUO-wdOABht8iNKH_-JkeA&libraries=places&callback=initMap"
             async defer></script>
 </body>
 </html>

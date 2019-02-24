@@ -10,8 +10,8 @@ using VacationPlanner.Data;
 namespace VacationPlanner.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190216191533_AddSearch")]
-    partial class AddSearch
+    [Migration("20190222201040_Itinerary")]
+    partial class Itinerary
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,13 +186,32 @@ namespace VacationPlanner.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("VacationPlanner.Models.CityDates", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .HasMaxLength(450);
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("CityDates");
+                });
+
             modelBuilder.Entity("VacationPlanner.Models.Itinerary", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("LocationName");
+                    b.Property<string>("Location")
+                        .HasMaxLength(450);
 
                     b.HasKey("ID");
 

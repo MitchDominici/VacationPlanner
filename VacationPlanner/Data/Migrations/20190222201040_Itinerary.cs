@@ -2,7 +2,7 @@
 
 namespace VacationPlanner.Data.Migrations
 {
-    public partial class AddSearch : Migration
+    public partial class Itinerary : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
