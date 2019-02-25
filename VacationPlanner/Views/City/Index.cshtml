@@ -23,8 +23,8 @@
         <span asp-validation-for="Name"></span>
 
 
-        <input type="date" id="start" asp-for="StartDate" name="StartDate"/>
-        <input type="date" id="end" asp-for="EndDate" name="EndDate"/>
+        <input type="date"   id="date0" asp-for="StartDate" name="StartDate" placeholder="Choose a start date"/>
+        <input type="date"   id="date1" asp-for="EndDate" name="EndDate" placeholder="Choose an end date"/>
 
     </div>
     <button type="submit" class="btn btn-primary" value="Encode" onclick="codeAddress()">Search</button>
@@ -32,7 +32,15 @@
 
 </form>
 <script>
-    
+    Date.prototype.toDateInputValue = (function() {
+        var local = new Date(this);
+        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+        return local.toJSON().slice(0,10);
+    });
+    $(document).ready( function() {
+        $('#date0').val(new Date().toDateInputValue());
+        $('#date1').val(new Date().toDateInputValue());
+    });
 </script>
 
 

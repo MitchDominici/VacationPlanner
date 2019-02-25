@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,8 +46,17 @@ namespace VacationPlanner.Controllers
 
             
             _context.SaveChanges();
-            return Redirect("/Itinerary/AddItinerary");
+            return Redirect("/Itinerary/ViewCities");
         }
+
+        public IActionResult ViewCities()
+        {
+            IList<City> cities = _context.City.Include(c => c.Name).ToList();
+
+            return View( cities );
+        }
+
+        
 
         
 

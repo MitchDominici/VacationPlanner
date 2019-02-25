@@ -15,7 +15,7 @@ namespace VacationPlanner.Models
         [StringLength( 450 )]
         public string Location { get; set; }
         public int CityID { get; set; }
-        
+        public City Name { get; set; }
 
     }
 }

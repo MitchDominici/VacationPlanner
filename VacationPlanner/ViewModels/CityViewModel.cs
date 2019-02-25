@@ -11,7 +11,10 @@ namespace VacationPlanner.ViewModels
         public int ID { get; set; }
         [StringLength( 450 )]
         public string Name { get; set; }
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
+        
+        [Display( Name = "End Date" )]
         public DateTime EndDate { get; set; }
     }
 }
