@@ -11,7 +11,7 @@ namespace VacationPlanner.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<Itinerary> Itinerary { get; set; }
+        public DbSet<Event> Events { get; set; }
         public DbSet<City> City { get; set; }
         
 

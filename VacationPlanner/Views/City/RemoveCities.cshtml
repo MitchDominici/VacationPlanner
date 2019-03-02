@@ -1,0 +1,32 @@
+﻿@model IList<VacationPlanner.Models.City>
+@{
+    ViewData [ "Title" ] = "RemoveCities";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+    <form method="POST">
+
+        @foreach ( var city in Model )
+        {
+
+
+            <input type="checkbox" name="cityIds" value=" @city.ID" id="@city.ID" />
+            <label for="@city.ID">@city.Name</label>
+
+        }
+        <br/>
+       <input type="submit" value="Remove Selected Cities" />
+    </form>
+
+<br/>
+
+    <a asp-controller="City" asp-action="ViewCities">View cities</a>
+</body>
+</html>
+

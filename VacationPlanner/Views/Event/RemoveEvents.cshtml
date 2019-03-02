@@ -1,0 +1,33 @@
+﻿@model IList<VacationPlanner.Models.Event>
+@{
+    ViewData [ "Title" ] = "RemoveCities";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+<form method="POST">
+
+    @foreach ( var e in Model )
+    {
+
+    <ul>
+        <li>
+            <input type="checkbox" name="eventIds" value=" @e.ID" id="@e.ID" />
+            <label for="@e.ID">@e.Location</label>
+        </li>
+    </ul>
+    }
+    <br/>
+    <input type="submit" value="Remove Selected Events" />
+</form>
+
+<br/>
+
+<a asp-controller="City" asp-action="ViewCities">View cities</a>
+</body>
+</html>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,35 @@ namespace VacationPlanner.Controllers
             return View(results);
         }
 
+        public IActionResult ViewCities()
+        {
+            IList<City> cities = _context.City.Include( c => c.Name ).ToList();
+
+            return View( cities );
+        }
+
         
+        public IActionResult RemoveCities()
+        {
+            IList<City> cities = _context.City.Include( c => c.Name ).ToList();
+
+            return View( cities );
+        }
+
+        [HttpPost]
+        public IActionResult RemoveCities(int [] cityIds)
+        {
+            foreach (int cityId in cityIds)
+            {
+                var theCity = _context.City.Single(c => c.ID == cityId);
+                _context.City.Remove(theCity);
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("ViewCities");
+        }
+
+
     }
 }

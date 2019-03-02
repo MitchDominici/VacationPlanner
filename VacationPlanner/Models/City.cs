@@ -16,8 +16,7 @@ namespace VacationPlanner.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public IList<Itinerary> Itineraries { get; set; }
+        public IList<Event> Events { get; set; }
         
-
     }
 }

@@ -7,8 +7,6 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-
-
 </head>
 <body>
     <div id="map"></div>
@@ -32,7 +30,7 @@
                 service.nearbySearch({
                     location: search,
                     radius: 10000,
-                    types: ['library']
+                    types: ['museum']
                 }, processResults);
             }
         });
@@ -72,34 +70,23 @@
             checkbox.type = "checkbox";
             checkbox.name = "destination";
             checkbox.value = place.name;
-            
             checkbox.setAttribute("asp-for", "LocationName");
-            
-            
-
             var label = document.createElement('label')
             label.htmlFor = "id";
             label.appendChild(document.createTextNode(place.name));
 
-
             placesList.appendChild(label);
             placesList.appendChild(checkbox);
-
-
-
 
             bounds.extend(place.geometry.location);
 
         }
         map.fitBounds(bounds);
-
-       
-
     }
     </script>
 
 
-@using (Html.BeginForm("Itinerary", "Itinerary", FormMethod.Post))
+@using (Html.BeginForm("Event", "Event", FormMethod.Post))
 { 
         <h2>Results</h2>
         <div  id="places" > </div>
@@ -109,10 +96,7 @@
     <input type="submit" value="Finished"/>
 }
 
-
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb_Rwd-ISTooUO-wdOABht8iNKH_-JkeA&libraries=places&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb_Rwd-ISTooUO-wdOABht8iNKH_-JkeA&libraries=places&callback=initMap"
             async defer></script>
 </body>
 </html>
