@@ -7,96 +7,102 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+    
+    <script>
+        var map;
+        var service;
+        var infowindow;
+        function initMap() {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ address: "@Model.Name" }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+                    var location = results[0].geometry.location,
+                        lat = location.lat(),
+                        lng = location.lng();
+                    var search = { lat: lat, lng: lng }
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: search ,
+                        zoom: 12
+                    });
+                    var service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch({
+                        location: search,
+                        radius: 10000,
+                        types: ['museum']
+                    }, processResults);
+                }
+            });
+        }
+        function processResults(results, status, pagination) {
+            if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                return;
+            } else {
+                createMarkers(results);
+            }
+            createMarkers(results);
+            moreButton.disabled = !pagination.hasNextPage;
+            getNextPage = pagination.hasNextPage && function() {
+                pagination.nextPage();
+            };
+        }
+        function createMarkers(places) {
+            var bounds = new google.maps.LatLngBounds();
+            var placesList = document.getElementById('places');
+            for (var i = 0, place; place = places[i]; i++) {
+                var image = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+                };
+                var marker = new google.maps.Marker({
+                    map: map,
+                    icon: image,
+                    title: place.name,
+                    animation: google.maps.Animation.DROP,
+                    position: place.geometry.location
+                });
+
+                var checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.name = "destination";
+                checkbox.value = place.name;
+                var label = document.createElement('label');
+                label.for = place.name;
+                label.appendChild(document.createTextNode(place.name));
+                var li = document.createElement('li');
+                li.name ="eventsList"
+                var span = document.createElement('span');
+                span.class = "checkmark";
+
+
+                placesList.appendChild(li);
+                li.appendChild(label);
+                label.appendChild(checkbox);
+                checkbox.appendChild(span);
+
+                bounds.extend(place.geometry.location);
+
+            }
+            map.fitBounds(bounds);
+        }
+    </script>
 </head>
 <body>
-    <div id="map"></div>
-    <script>
-    var map;
-    var service;
-    var infowindow;
-    function initMap() {
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ address: "@Model.Name" }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-                var location = results[0].geometry.location,
-                    lat = location.lat(),
-                    lng = location.lng();
-                var search = { lat: lat, lng: lng }
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: search ,
-                    zoom: 12
-                });
-                var service = new google.maps.places.PlacesService(map);
-                service.nearbySearch({
-                    location: search,
-                    radius: 10000,
-                    types: ['museum']
-                }, processResults);
-            }
-        });
+
+    @using ( Html.BeginForm( "Event" , "Event" , FormMethod.Post ) )
+    {
+        <div id="map"></div>
+        <div id="right-panel">
+            <h2>Results</h2>
+            <ul id="places"></ul>
+            <input type="submit" value="Finished" />
+        </div>
+
     }
-    function processResults(results, status, pagination) {
-        if (status !== google.maps.places.PlacesServiceStatus.OK) {
-            return;
-        } else {
-            createMarkers(results);
-        }
-        createMarkers(results);
-        moreButton.disabled = !pagination.hasNextPage;
-        getNextPage = pagination.hasNextPage && function() {
-            pagination.nextPage();
-        };
-    }
-    function createMarkers(places) {
-        var bounds = new google.maps.LatLngBounds();
-        var placesList = document.getElementById('places');
-        for (var i = 0, place; place = places[i]; i++) {
-            var image = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
-            var marker = new google.maps.Marker({
-                map: map,
-                icon: image,
-                title: place.name,
-                animation: google.maps.Animation.DROP,
-                position: place.geometry.location
-            });
 
-            var checkbox = document.createElement('input');
-            checkbox.type = "checkbox";
-            checkbox.name = "destination";
-            checkbox.value = place.name;
-            checkbox.setAttribute("asp-for", "LocationName");
-            var label = document.createElement('label')
-            label.htmlFor = "id";
-            label.appendChild(document.createTextNode(place.name));
-
-            placesList.appendChild(label);
-            placesList.appendChild(checkbox);
-
-            bounds.extend(place.geometry.location);
-
-        }
-        map.fitBounds(bounds);
-    }
-    </script>
-
-
-@using (Html.BeginForm("Event", "Event", FormMethod.Post))
-{ 
-        <h2>Results</h2>
-        <div  id="places" > </div>
-    <button id="more">More results</button>
-  
-
-    <input type="submit" value="Finished"/>
-}
-
-<script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb_Rwd-ISTooUO-wdOABht8iNKH_-JkeA&libraries=places&callback=initMap"
             async defer></script>
 </body>
 </html>

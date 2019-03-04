@@ -15,10 +15,12 @@
         @foreach ( var city in Model )
         {
 
-
-            <input type="checkbox" name="cityIds" value=" @city.ID" id="@city.ID" />
-            <label for="@city.ID">@city.Name</label>
-
+            <ul>
+                <li>
+                    <input type="checkbox" name="cityIds" value=" @city.ID" id="@city.ID" />
+                    <label for="@city.ID">@city.Name</label>
+                </li>
+            </ul>
         }
         <br/>
        <input type="submit" value="Remove Selected Cities" />

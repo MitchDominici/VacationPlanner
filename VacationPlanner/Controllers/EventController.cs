@@ -9,6 +9,7 @@ using VacationPlanner.Models;
 using VacationPlanner.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.CodeAnalysis;
+using VacationPlanner.Data.Migrations;
 
 namespace VacationPlanner.Controllers
 {
@@ -53,18 +54,13 @@ namespace VacationPlanner.Controllers
         {
             IList<Event> itin = _context.Events.Include(i => i.City).Where(i => i.City.ID == id).ToList();
             
-            return View(itin);
+            return View(itin );
         }
 
-        public IActionResult RemoveEvents()
-        {
-            IList<Event> events = _context.Events.Include( e => e.Location ).ToList();
-
-            return View(events);
-        }
+        
 
         [HttpPost]
-        public IActionResult RemoveEvents( int [ ] eventIds )
+        public IActionResult RemoveEvents( int [ ] eventIds, int cityId )
         {
             foreach ( int eventId in eventIds )
             {
@@ -74,7 +70,9 @@ namespace VacationPlanner.Controllers
 
             _context.SaveChanges();
 
-            return Redirect("/City/ViewCities");
+            
+
+            return Redirect("/Event/ViewEvents/" +  cityId);
         }
         
 
