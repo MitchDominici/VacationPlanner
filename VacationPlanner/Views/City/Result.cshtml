@@ -1,4 +1,4 @@
-﻿@model VacationPlanner.Models.City
+﻿@model VacationPlanner.ViewModels.CityViewModel
 
 
 <!DOCTYPE html>
@@ -7,7 +7,7 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    
+    <link href="~/css/map.css" rel="stylesheet" />
     <script>
         var map;
         var service;
@@ -72,7 +72,7 @@
                 label.for = place.name;
                 label.appendChild(document.createTextNode(place.name));
                 var li = document.createElement('li');
-                li.name ="eventsList"
+                li.id ="eventsList"
                 var span = document.createElement('span');
                 span.class = "checkmark";
 
@@ -97,7 +97,7 @@
         <div id="right-panel">
             <h2>Results</h2>
             <ul id="places"></ul>
-            <input type="submit" value="Finished" />
+            <input type="submit" value="Finished" id="saveEvents"/>
         </div>
 
     }

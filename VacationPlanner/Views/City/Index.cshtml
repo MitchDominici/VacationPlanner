@@ -1,7 +1,7 @@
 ﻿@model VacationPlanner.ViewModels.CityViewModel
 @{
     ViewData [ "Title" ] = "Search";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+   
 }
 
 <h1>Where are you headed?</h1>
@@ -18,7 +18,7 @@
 
     <div class="form-group">
 
-        <input id="address" class=" form-control" asp-for="Name" placeholder="Search for a destination" autofocus />
+        <input id="address" class=" form-control" asp-for="Name" placeholder="Search for a destination" autofocus required/>
 
         <span asp-validation-for="Name"></span>
 

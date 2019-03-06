@@ -1,37 +1,62 @@
 ﻿@model IList<VacationPlanner.Models.City>
 
-<!DOCTYPE html>
 <html>
 <head>
-   
+    <title></title>
+    <script>
+        function Remove() {
+            var checkBox = document.getElementById("remove");
+            var places = document.getElementById("places");
+            var events = document.getElementById("events");
+            if (checkBox.checked == true) {
+                places.style.display = "block";
+                cities.style.display = "none";
+
+            }
+            else {
+                places.style.display = "none";
+                cities.style.display = "block";
+            }
+        }
+    </script>
 </head>
 <body>
-
-<table class="table">
-    <tr>
-        <th>City</th>
-    </tr>
-
-    @foreach (var city in Model)
-    {
-        <tr>
-            <td>
-
-                <a asp-controller="Event" asp-action="ViewEvents" asp-route-id="@city.ID">@city.Name</a>
-            </td>
-        </tr>
-    }
-</table>
 
 @if (Model.Count == 0)
 {
     <p>No destinations yet!</p>
 }
 
+<form asp-action="RemoveCities" asp-controller="City" id="places" style="display:none">
+    @foreach (var c in Model)
+    {
+        <ul>
+            <li>
+                <input type="checkbox" name="cityIds" value=" @c.ID" id="@c.ID"/>
+                <input type="hidden" name="cityId" value="" id=""/>
+                <label for="@c.ID">@c.Name</label>
+            </li>
+        </ul>
+
+
+    }
+
+    <input type="submit" value="Remove Selected Cities"/>
+    <br/>
+</form>
+<div id="cities" style="display:block">
+    @foreach (var c in Model)
+    {
+        <ul>
+            <li id="@c.ID"><a asp-controller="Event" asp-action="ViewEvents" asp-route-id="@c.ID">@c.Name</a></li>
+        </ul>
+    }
+</div>
 <br/>
-    <div style="padding-bottom:100px">
-        <h6> <a asp-controller="City" asp-action="RemoveCities">Remove Cities</a></h6>
-    </div>
+<label for="remove">Remove Cities</label>
+<input type="checkbox" onclick="Remove()" id="remove"/>
+
+
 
 </body>
 </html>

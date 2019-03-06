@@ -41,7 +41,7 @@ namespace VacationPlanner.Controllers
         }
 
         [HttpGet]
-        public IActionResult Result(City results)
+        public IActionResult Result(CityViewModel results)
         {
             return View(results);
         }
@@ -53,14 +53,14 @@ namespace VacationPlanner.Controllers
             return View( cities );
         }
 
-        
+        /*
         public IActionResult RemoveCities()
         {
             IList<City> cities = _context.City.Include( c => c.Name ).ToList();
 
             return View( cities );
         }
-
+        */
         [HttpPost]
         public IActionResult RemoveCities(int [] cityIds)
         {
