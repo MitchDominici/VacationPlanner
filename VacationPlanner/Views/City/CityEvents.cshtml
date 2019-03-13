@@ -1,0 +1,17 @@
+﻿@model IList<VacationPlanner.Models.City>
+@{
+    ViewData["Title"] = "CityEvents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CityEvents</h1>
+@foreach (var c in Model)
+{
+    <ul>
+        <li>
+            @c.Name
+        </li>
+        
+    
+    </ul>
+}

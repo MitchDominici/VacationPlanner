@@ -30,39 +30,47 @@
 </head>
 <body>
 
-@if (Model.Count == 0)
-{
-    <p>No events yet!</p>
-}
 
-<form asp-action="RemoveEvents" asp-controller="Event" id="places" style="display:none">
-    @foreach (var e in Model)
+    @if ( Model.Count == 0 )
     {
-        <ul >
-            <li >
-                <input type="checkbox" name="eventIds" value=" @e.ID" id="@e.ID"/>
-                <input type="hidden" name="cityId" value="@e.CityID" id="@e.CityID"/>
-                <label for="@e.ID">@e.Location</label>
-            </li>
-        </ul>
-
-
+        <p>No events yet!</p>
+        
     }
 
-    <input type="submit" value="Remove Selected Events"/>
-    <br/>
-</form>
-<div id="events" style="display:block">
-    @foreach (var e in Model)
-    {
-        <ul id="sort">
-            <li class="ui-state-default" id="events">@e.Location</li>
-        </ul>
-    }
-</div>
-<br/>
-<label for="remove">Remove Events</label>
-<input type="checkbox" onclick="Remove()" id="remove"/>
+    <form asp-action="RemoveEvents" asp-controller="Event" id="places" style="display:none">
+        @foreach ( var e in Model )
+        {
+            <ul>
+                <li>
+                    <input type="checkbox" name="eventIds" value=" @e.ID" id="@e.ID" />
+                    <input type="hidden" name="cityId" value="@e.CityID" id="@e.CityID" />
+                    <label for="@e.ID">@e.Location</label>
+                </li>
+            </ul>
+
+
+        }
+
+        <input type="submit" value="Remove Selected Events" />
+        <br />
+    </form>
+    <div id="events" style="display:block">
+        @foreach ( var e in Model )
+        {
+            
+            <ul>
+                <li id="events">@e.Location</li>
+
+            </ul>
+        }
+    </div>
+    <br />
+    <label for="remove">Remove Events</label>
+   
+<input type="checkbox" onclick="Remove()" id="remove"/> 
+
+ 
+
 
 
 </body>

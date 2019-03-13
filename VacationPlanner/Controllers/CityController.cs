@@ -31,12 +31,14 @@ namespace VacationPlanner.Controllers
         public IActionResult AddCity( City CityName )
         {
             if (!ModelState.IsValid) return View();
+
             var city = CityName.Name;
+
             _context.City.Add( CityName );
             _context.SaveChanges();
 
             
-            return RedirectToAction("Result", new {Name = CityName.Name});
+            return RedirectToAction("Result", new {CityName.Name});
 
         }
 
@@ -53,14 +55,7 @@ namespace VacationPlanner.Controllers
             return View( cities );
         }
 
-        /*
-        public IActionResult RemoveCities()
-        {
-            IList<City> cities = _context.City.Include( c => c.Name ).ToList();
-
-            return View( cities );
-        }
-        */
+        
         [HttpPost]
         public IActionResult RemoveCities(int [] cityIds)
         {
@@ -74,6 +69,8 @@ namespace VacationPlanner.Controllers
 
             return RedirectToAction("ViewCities");
         }
+
+        
 
 
     }

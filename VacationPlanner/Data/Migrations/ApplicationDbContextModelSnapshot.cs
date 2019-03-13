@@ -268,7 +268,7 @@ namespace VacationPlanner.Data.Migrations
             modelBuilder.Entity("VacationPlanner.Models.Event", b =>
                 {
                     b.HasOne("VacationPlanner.Models.City", "City")
-                        .WithMany("Itineraries")
+                        .WithOne("City")
                         .HasForeignKey("CityID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

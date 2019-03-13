@@ -48,16 +48,12 @@ namespace VacationPlanner.Controllers
             return Redirect("/City/ViewCities");
         }
 
-       
-
-        public IActionResult ViewEvents( int id)
+        public IActionResult ViewEvents( int id )
         {
-            IList<Event> itin = _context.Events.Include(i => i.City).Where(i => i.City.ID == id).ToList();
-            
-            return View(itin );
-        }
-
+            IList<Event> itin = _context.Events.Include( i => i.City ).Where( i => i.City.ID == id ).ToList();
         
+            return View(itin);
+        }
 
         [HttpPost]
         public IActionResult RemoveEvents( int [ ] eventIds, int cityId )
@@ -73,6 +69,12 @@ namespace VacationPlanner.Controllers
             
 
             return Redirect("/Event/ViewEvents/" +  cityId);
+        }
+
+        
+        public IActionResult AddEvents(int cityID)
+        {
+            return Redirect("/City/Result/" + cityID);
         }
         
 
