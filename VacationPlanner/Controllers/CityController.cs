@@ -19,6 +19,7 @@ namespace VacationPlanner.Controllers
         {
             _context = dbContext;
         }
+
         public IActionResult Index()
         {
             var cityDatesViewModel = new CityViewModel();
@@ -38,7 +39,7 @@ namespace VacationPlanner.Controllers
             _context.SaveChanges();
 
             
-            return RedirectToAction("Result", new {CityName.Name});
+            return RedirectToAction("Result", new {CityName.Name,CityName.Type});
 
         }
 
@@ -69,6 +70,8 @@ namespace VacationPlanner.Controllers
 
             return RedirectToAction("ViewCities");
         }
+
+
 
         
 

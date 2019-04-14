@@ -9,6 +9,7 @@
     <meta charset="utf-8">
     <link href="~/css/map.css" rel="stylesheet" />
     <script>
+    
         var map;
         var service;
         var infowindow;
@@ -28,7 +29,7 @@
                     service.nearbySearch({
                         location: search,
                         radius: 10000,
-                        types: ['museum']
+                        types: ["@Model.Type"]
                     }, processResults);
                 }
             });
@@ -102,7 +103,7 @@
 
     }
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb_Rwd-ISTooUO-wdOABht8iNKH_-JkeA&libraries=places&callback=initMap"
             async defer></script>
 </body>
 </html>

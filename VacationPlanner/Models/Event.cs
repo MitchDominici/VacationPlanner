@@ -13,6 +13,8 @@ namespace VacationPlanner.Models
         public int ID { get; set; }
         [StringLength( 450 )]
         public string Location { get; set; }
+        //public string Type { get; set; }
+
         public int CityID { get; set; }
         public City City { get; set; }
 
