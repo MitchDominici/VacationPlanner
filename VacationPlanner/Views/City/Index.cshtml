@@ -1,7 +1,7 @@
 ﻿@model VacationPlanner.ViewModels.CityViewModel
 @{
     ViewData [ "Title" ] = "Search";
-   
+
 }
 
 <h1>Where are you headed?</h1>
@@ -10,6 +10,7 @@
 <title>jQuery UI Datepicker - Default functionality</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <form asp-controller="City" asp-action="AddCity" id="address" method="post">
@@ -18,13 +19,41 @@
 
     <div class="form-group">
 
-        <input id="address" class=" form-control" asp-for="Name" placeholder="Search for a city." autofocus required/>
+        <input id="address" class=" form-control" asp-for="Name" placeholder="Search for a city" autofocus required />
 
         <span asp-validation-for="Name"></span>
 
+        <select name="Type" asp-for="Type" required>
+            <option id ="0" value="amusement_park">Amusement Park</option>
+            <option id="1" value="aquarium">Aquraium</option>
+            <option id="2" value="art_gallery">Art Gallery</option>
+            <option id="3" value="bar">Bar</option>
+            <option id="4" value="café">Cafe</option>
+            <option id="5" value="campground">Campground</option>
+            <option id="6" value="casino">Casino</option>
+            <option id="7" value="church">Church</option>
+            <option id="8" value="embassy">Embassy</option>
+            <option id="9" value="hindu_temple">Hindu Temple</option>
+            <option id="10" value="library">Library</option>
+            <option id="11" value="local_government_office">Government Office</option>
+            <option id="12" value="lodging">Lodging</option>
+            <option id="13" value="mosque">Mosque</option>
+            <option id="14" value="movie_theater">Movie Theater</option>
+            <option id="15" value="museum">Museum</option>
+            <option id="16" value="night_club">Night Club</option>
+            <option id="17" value="park">Park</option>
+            <option id="18" value="restaurant">Restaurant</option>
+            <option id="19" value="shopping_mall">Shopping Mall</option>
+            <option id="20" value="spa">Spa</option>
+            <option id="21" value="stadium">Stadium</option>
+            <option id="22" value="synagogue">Synagogue</option>
+            <option id="23"value="zoo">Zoo</option>
 
-        <input type="date"   id="date0" asp-for="StartDate" name="StartDate" placeholder="Choose a start date"/>
-        <input type="date"   id="date1" asp-for="EndDate" name="EndDate" placeholder="Choose an end date"/>
+        </select>
+
+
+        <input type="date" id="date0" asp-for="StartDate" name="StartDate" placeholder="Choose a start date" />
+        <input type="date" id="date1" asp-for="EndDate" name="EndDate" placeholder="Choose an end date" />
 
     </div>
     <button type="submit" class="btn btn-primary" value="Encode" onclick="codeAddress()">Search</button>
@@ -32,12 +61,12 @@
 
 </form>
 <script>
-    Date.prototype.toDateInputValue = (function() {
+    Date.prototype.toDateInputValue = (function () {
         var local = new Date(this);
         local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-        return local.toJSON().slice(0,10);
+        return local.toJSON().slice(0, 10);
     });
-    $(document).ready( function() {
+    $(document).ready(function () {
         $('#date0').val(new Date().toDateInputValue());
         $('#date1').val(new Date().toDateInputValue());
     });
